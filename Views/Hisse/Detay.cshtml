@@ -1,0 +1,11 @@
+@model BorsaHisseWeb.Models.Hisse
+
+<h2>@Model.Sembol - @Model.Ad</h2>
+<ul class="list-group">
+    <li class="list-group-item">Önceki Fiyat: @Model.OncekiFiyat</li>
+    <li class="list-group-item">Kapanış Fiyatı: @Model.KapanisFiyati</li>
+    <li class="list-group-item">Değişim: @Model.Degisim</li>
+    <li class="list-group-item">Tarih: @Model.Tarih.ToShortDateString()</li>
+</ul>
+
+<a href="/Hisse/Index" class="btn btn-secondary mt-3">Geri Dön</a>

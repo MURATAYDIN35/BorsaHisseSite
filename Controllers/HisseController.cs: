@@ -4,6 +4,14 @@ using BorsaHisseSite.Models;
 namespace BorsaHisseSite.Controllers
 {
     public class HisseController : Controller
+    
+    private readonly FinnhubService _finnhub;
+
+public HisseController(BorsaContext context, FinnhubService finnhub)
+{
+    _context = context;
+    _finnhub = finnhub;
+}
     {
         public IActionResult Index()
         {
@@ -15,5 +23,30 @@ namespace BorsaHisseSite.Controllers
             };
             return View(hisseListesi);
         }
+
+                public async Task<IActionResult> Detay(int id)
+        {
+            var hisse = await _context.Hisseler.FindAsync(id);
+            if (hisse == null) return NotFound();
+
+            return View(hisse);
+        }
+
+
+// Fiyatları API'den alıp göstermek
+public async Task<IActionResult> Canli(string symbol)
+{
+    var current = await _finnhub.GetPrice(symbol);
+    var previous = await _finnhub.GetPreviousPrice(symbol);
+
+    ViewBag.Symbol = symbol;
+    ViewBag.Current = current;
+    ViewBag.Previous = previous;
+    ViewBag.Degisim = current - previous;
+
+    return View();
+}
+
+
     }
 }

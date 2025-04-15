@@ -2,8 +2,17 @@ using BorsaHisseSite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// DB Context Ayarı
+builder.Services.AddDbContext<BorsaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<FinnhubService>();
+
+
 
 // Add HttpClient and HisseService
 builder.Services.AddHttpClient<HisseService>();
