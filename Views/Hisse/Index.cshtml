@@ -1,0 +1,28 @@
+@model List<BorsaHisseSite.Models.HisseModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Hisse Adı</th>
+            <th>Fiyat</th>
+            <th>Düşen</th>
+            <th>Yükselen</th>
+            <th>Kapanış Fiyatı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hisse in Model)
+        {
+            <tr>
+                <td>@hisse.HisseAdi</td>
+                <td class="@(hisse.DusanFiyat > 0 ? "text-danger" : "text-success")">@hisse.Fiyat</td>
+                <td class="@(hisse.YükselenFiyat > 0 ? "text-success" : "text-warning")">@hisse.YükselenFiyat</td>
+                <td>@hisse.KapanisFiyati</td>
+            </tr>
+        }
+    </tbody>
+</table>

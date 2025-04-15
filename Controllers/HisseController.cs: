@@ -1,0 +1,19 @@
+using Microsoft.AspNetCore.Mvc;
+using BorsaHisseSite.Models;
+
+namespace BorsaHisseSite.Controllers
+{
+    public class HisseController : Controller
+    {
+        public IActionResult Index()
+        {
+            // API'den veri çekme ve view'a aktarma işlemi burada yapılacak.
+            List<HisseModel> hisseListesi = new List<HisseModel>
+            {
+                new HisseModel { HisseAdi = "Hisse 1", Fiyat = 100, DusanFiyat = 5, YükselenFiyat = 7, KapanisFiyati = 98 },
+                new HisseModel { HisseAdi = "Hisse 2", Fiyat = 120, DusanFiyat = 3, YükselenFiyat = 9, KapanisFiyati = 110 }
+            };
+            return View(hisseListesi);
+        }
+    }
+}
